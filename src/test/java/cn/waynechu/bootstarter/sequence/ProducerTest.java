@@ -5,14 +5,14 @@ import cn.waynechu.bootstarter.sequence.property.SequenceProperty;
 import cn.waynechu.bootstarter.sequence.property.ZookeeperProperty;
 import cn.waynechu.bootstarter.sequence.register.zookeeper.ZookeeperWorkerRegister;
 import cn.waynechu.bootstarter.sequence.registry.ZookeeperRegistryCenter;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
 
 /**
  * @author zhuwei
  * @since 2020/6/12 17:07
  */
+@Slf4j
 public class ProducerTest {
 
     @Test
@@ -29,8 +29,8 @@ public class ProducerTest {
             ZookeeperWorkerRegister zookeeperWorkerRegister = new ZookeeperWorkerRegister(zookeeperRegistryCenter, sequenceProperty);
             SnowFlakeIdGenerator generator = new SnowFlakeIdGenerator(zookeeperWorkerRegister);
 
-            System.out.println(generator.nextId("default"));
-            System.out.println(generator.nextId("default"));
+            log.info(String.valueOf(generator.nextId("default")));
+            log.info(String.valueOf(generator.nextId("default")));
             generator.close();
         } catch (Exception e) {
             e.printStackTrace();
