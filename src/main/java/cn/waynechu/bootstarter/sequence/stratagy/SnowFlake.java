@@ -49,7 +49,7 @@ public class SnowFlake {
     private static final Random RANDOM = new Random();
 
     @Getter
-    private final long workerId;
+    private final int workerId;
     private long sequence = 0L;
     private long lastTimestamp = -1L;
 
@@ -108,7 +108,7 @@ public class SnowFlake {
             sequence = RANDOM.nextInt(10);
         }
         lastTimestamp = currentTimeMillis;
-        return ((currentTimeMillis - EPOCH) << TIMESTAMP_LEFT_SHIFT) | (workerId << WORKER_ID_SHIFT) | sequence;
+        return ((currentTimeMillis - EPOCH) << TIMESTAMP_LEFT_SHIFT) | ((long) workerId << WORKER_ID_SHIFT) | sequence;
     }
 
     private static long tilNextMillis(long lastTimestamp) {
